@@ -1,5 +1,8 @@
+'use client'
+import { useState } from 'react'
+
 async function makePostRequest() {
-  const res = await fetch(`${process.env.NEXT_URL}/api/hello`, {
+  const res = await fetch(`/api/hello`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -10,13 +13,18 @@ async function makePostRequest() {
   return { data }
 }
 
-export default async function Friends() {
-  const { data } = await makePostRequest()
+export default function Friends() {
+  const [message, setMessage] = useState('')
+  const onClick = async () => {
+    const { data } = await makePostRequest()
+    setMessage(data.message)
+  }
   return (
     <div>
       <h1>Friends Page</h1>
       <p>This is the friends page.</p>
-      <h2>{data.message}</h2>
+      <h2>{message}</h2>
+      <button onClick={onClick}>Click me</button>
     </div>
   )
 }
