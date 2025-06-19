@@ -1,5 +1,10 @@
 import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 
+export const metadata: Metadata = {
+  title: 'Create Next App with TypeScript',
+  description: 'Created user page by nextjs',
+}
 async function fetchuser(id: string) {
   const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
   if (!res.ok) {
